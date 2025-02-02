@@ -1,3 +1,11 @@
-.container {
-  border: 1px solid #09f;
+.treeBar {
+  min-width: 15%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: var(--black);
+  padding-top: 2.5%;
+
+  z-index: 1;
 }

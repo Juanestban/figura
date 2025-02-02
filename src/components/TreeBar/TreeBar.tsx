@@ -3,16 +3,16 @@ import clsx from 'clsx';
 
 import s from './TreeBar.module.css';
 
-type PrimitiveProps = ComponentProps<'div'>;
+type PrimitiveProps = Omit<ComponentProps<'div'>, 'children'>;
 
 interface TreeBarProps extends PrimitiveProps {
   // your props
 }
 
-const TreeBar: FC<TreeBarProps> = ({ ref, className, children, ...props }) => {
+const TreeBar: FC<TreeBarProps> = ({ ref, className, ...props }) => {
   return (
-    <div ref={ref} className={clsx(s.container, className)} {...props}>
-      {children}
+    <div ref={ref} className={clsx(s.treeBar, className)} {...props}>
+      Layer 1
     </div>
   );
 };

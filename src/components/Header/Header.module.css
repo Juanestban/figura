@@ -1,0 +1,54 @@
+.headerContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 45px;
+  background-color: var(--stroke-black);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  z-index: 2;
+}
+
+.left,
+.center,
+.right {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.left {
+  width: 30%;
+}
+
+.center {
+  place-content: center;
+  width: 30%;
+}
+
+.right {
+  width: 30%;
+  place-content: flex-end;
+}
+
+.actionButton {
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0 10px;
+  gap: 5px;
+  cursor: pointer;
+
+  transition: background-color 500ms ease;
+}
+
+.focusedButton {
+  background-color: var(--red);
+  transition: background-color 500ms ease;
+}
