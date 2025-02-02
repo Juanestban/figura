@@ -1,0 +1,45 @@
+{
+  "name": "figura",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "gc": "lun-cli gc",
+    "preview": "vite preview",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "2",
+    "@tauri-apps/plugin-opener": "2",
+    "clsx": "2.1.1",
+    "lun-cli": "2.5.0",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "react-icons": "5.4.0",
+    "wouter": "3.5.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.0.3",
+    "@tauri-apps/cli": "2",
+    "@types/react": "19.0.8",
+    "@types/react-dom": "19.0.3",
+    "@vitejs/plugin-react-swc": "3.7.2",
+    "biome": "0.3.3",
+    "eslint": "9.19.0",
+    "eslint-config-prettier": "10.0.1",
+    "postcss": "8.5.1",
+    "prettier": "3.4.2",
+    "standard": "17.1.2",
+    "tailwindcss": "4.0.3",
+    "typescript": "~5.7.3",
+    "vite": "6.0.3"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/standard/eslintrc.json",
+      "prettier"
+    ]
+  }
+}
