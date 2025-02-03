@@ -1,22 +1,34 @@
-import { FC, ComponentProps } from 'react';
+import { type FC, type ComponentProps } from 'react';
 import clsx from 'clsx';
-import { Stage, Layer, Text, Rect } from 'react-konva';
+import { Stage, Layer } from 'react-konva';
+
+import { useDrawer } from 'figura/hooks/useDrawer';
 
 import s from './Drawer.module.css';
+import { Figure } from '../Figure';
 
 type PrimitiveProps = Omit<ComponentProps<'div'>, 'children'>;
 
-interface DrawerProps extends PrimitiveProps {
-  // your props
-}
+interface DrawerProps extends PrimitiveProps {}
 
 const Drawer: FC<DrawerProps> = ({ ref, className, ...props }) => {
+  const { state, handler } = useDrawer();
+  const { figures } = state;
+  const { mouseDown, mouseUp } = handler;
+  const currentFigures = figures;
+
   return (
     <div ref={ref} className={clsx(s.container, className)} {...props}>
-      <Stage width={window.innerWidth} height={window.innerHeight}>
+      <Stage
+        width={window.innerWidth}
+        height={window.innerHeight}
+        onMouseDown={mouseDown}
+        onMouseUp={mouseUp}
+      >
         <Layer>
-          <Text text="Texto!" x={290} y={50} fontSize={16} />
-          <Rect x={290} y={70} width={100} height={100} fill="#09f" draggable />
+          {(currentFigures ?? []).map(({ id, type, props }) => (
+            <Figure key={id} type={type} {...props} />
+          ))}
         </Layer>
       </Stage>
     </div>
