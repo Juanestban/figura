@@ -1,7 +1,7 @@
 import { type PropsWithChildren, useState, useReducer } from 'react';
 import Konva from 'konva';
 
-import { INITIAL_STATE, DrawerContext } from './DrawerContext';
+import { INITIAL_STATE, DrawerContext, type HoverSelection } from './DrawerContext';
 import reducer from './reducer';
 import { DrawerType } from 'figura/models';
 
@@ -15,8 +15,19 @@ const INITIAL_POSITIONS: IPosition = {
   y: null,
 };
 
+const DEFAULT_HOVER_SELECTION: HoverSelection = {
+  x: 0,
+  initX: 0,
+  y: 0,
+  initY: 0,
+  width: 0,
+  height: 0,
+};
+
 function DrawerProvider({ children }: PropsWithChildren) {
   const [positions, setPositions] = useState<IPosition>(INITIAL_POSITIONS);
+  const [isSelecting, setIsSelecting] = useState(false);
+  const [hoverSelection, setHoverSelection] = useState<HoverSelection>(DEFAULT_HOVER_SELECTION);
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const { action } = state;
 
@@ -26,7 +37,13 @@ function DrawerProvider({ children }: PropsWithChildren) {
       const { clientX: x, clientY: y } = evt;
 
       setPositions({ x, y });
+      setHoverSelection((prev) => ({ ...prev, initX: x, initY: y, x, y }));
+      setIsSelecting(true);
     }
+  };
+
+  const handleHoverSelection = (options: Partial<HoverSelection>) => {
+    setHoverSelection((prev) => ({ ...prev, ...options }));
   };
 
   const mouseUp = (event: Konva.KonvaEventObject<MouseEvent>) => {
@@ -36,19 +53,19 @@ function DrawerProvider({ children }: PropsWithChildren) {
       const { evt } = event;
       const { clientX, clientY } = evt;
 
-      console.log('<-- frame [created] -->', { ...positions, end: { clientX, clientY } });
-
       const width = initX > clientX ? initX - clientX : clientX - initX;
       const height = initY > clientY ? initY - clientY : clientY - initY;
       const x = initX > clientX ? initX - width : initX;
       const y = initY > clientY ? initY - height : initY;
 
+      setIsSelecting(false);
       dispatch({
         type: DrawerType.NEW_FIGURE,
         payload: {
           props: { x, y, width, height, stroke: 'red', strokeWidth: 2 },
         },
       });
+      handleHoverSelection(DEFAULT_HOVER_SELECTION);
     }
   };
 
@@ -56,11 +73,14 @@ function DrawerProvider({ children }: PropsWithChildren) {
     <DrawerContext.Provider
       value={{
         state,
+        isSelecting,
+        hoverSelection,
         handler: {
           mouseDown,
           mouseUp,
         },
         dispatch,
+        handleHoverSelection,
       }}
     >
       {children}

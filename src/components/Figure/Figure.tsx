@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import { type FC, memo } from 'react';
 import { Text, Rect, Circle } from 'react-konva';
 
-import { Child, PrimitiveFigure } from 'figura/models/idrawer';
+import type { Child, PrimitiveFigure } from 'figura/models/idrawer';
 
 interface FigureProps extends Child {}
 
@@ -11,11 +11,11 @@ const Element: Record<Child['type'], PrimitiveFigure> = {
   Text: Text,
 };
 
-const Figure: FC<FigureProps> = ({ type, ...props }) => {
+const Figure: FC<FigureProps> = ({ type, props }) => {
   const Figura = Element[type];
 
   return <Figura {...props} />;
 };
 
-export default Figure;
+export default memo(Figure);
 export type { FigureProps };
