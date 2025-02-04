@@ -1,3 +1,4 @@
+import { Dispatch } from 'react';
 import Konva from 'konva';
 import { type KonvaNodeComponent } from 'react-konva';
 
@@ -28,7 +29,35 @@ export interface DrawerState {
   figures: Figure[];
 }
 
+type Handler = (event: Konva.KonvaEventObject<MouseEvent>) => void;
+
+export interface HoverSelection {
+  initX: number;
+  initY: number;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
+export interface DrawerContextType {
+  state: DrawerState;
+  isSelecting: boolean;
+  hoverSelection: HoverSelection;
+  handler: {
+    mouseDown: Handler;
+    mouseUp: Handler;
+  };
+  dispatch: Dispatch<ActionReducerDrawer>;
+  handleHoverSelection: (options: Partial<HoverSelection>) => void;
+}
+
 export type ActionReducerDrawer = {
   type: DrawerType;
   payload: any;
+};
+
+export type IPosition = {
+  x: number | null;
+  y: number | null;
 };

@@ -1,34 +1,21 @@
 import { type PropsWithChildren, useState, useReducer } from 'react';
 import Konva from 'konva';
 
-import { INITIAL_STATE, DrawerContext, type HoverSelection } from './DrawerContext';
+import { DrawerContext } from './DrawerContext';
 import reducer from './reducer';
 import { DrawerType } from 'figura/models';
-
-type IPosition = {
-  x: number | null;
-  y: number | null;
-};
-
-const INITIAL_POSITIONS: IPosition = {
-  x: null,
-  y: null,
-};
-
-const DEFAULT_HOVER_SELECTION: HoverSelection = {
-  x: 0,
-  initX: 0,
-  y: 0,
-  initY: 0,
-  width: 0,
-  height: 0,
-};
+import type { HoverSelection, IPosition } from 'figura/models';
+import {
+  INITIAL_POSITIONS,
+  INITIALDRAWER_CONTEXT_STATE,
+  DEFAULT_HOVER_SELECTION,
+} from 'figura/config/constants';
 
 function DrawerProvider({ children }: PropsWithChildren) {
   const [positions, setPositions] = useState<IPosition>(INITIAL_POSITIONS);
   const [isSelecting, setIsSelecting] = useState(false);
   const [hoverSelection, setHoverSelection] = useState<HoverSelection>(DEFAULT_HOVER_SELECTION);
-  const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
+  const [state, dispatch] = useReducer(reducer, INITIALDRAWER_CONTEXT_STATE);
   const { action } = state;
 
   const mouseDown = (event: Konva.KonvaEventObject<MouseEvent>) => {

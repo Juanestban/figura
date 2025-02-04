@@ -1,39 +1,11 @@
-import { Dispatch, createContext } from 'react';
-import Konva from 'konva';
+import { createContext } from 'react';
 
-import type { ActionReducerDrawer, DrawerState } from 'figura/models';
 import { noop } from 'figura/utils/noop';
-
-type Handler = (event: Konva.KonvaEventObject<MouseEvent>) => void;
-
-export interface HoverSelection {
-  initX: number;
-  initY: number;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-}
-
-interface DrawerContextType {
-  state: DrawerState;
-  isSelecting: boolean;
-  hoverSelection: HoverSelection;
-  handler: {
-    mouseDown: Handler;
-    mouseUp: Handler;
-  };
-  dispatch: Dispatch<ActionReducerDrawer>;
-  handleHoverSelection: (options: Partial<HoverSelection>) => void;
-}
-
-export const INITIAL_STATE: DrawerState = {
-  action: 'selection',
-  figures: [],
-};
+import type { DrawerContextType } from 'figura/models';
+import { INITIALDRAWER_CONTEXT_STATE } from 'figura/config/constants';
 
 export const DrawerContext = createContext<DrawerContextType>({
-  state: INITIAL_STATE,
+  state: INITIALDRAWER_CONTEXT_STATE,
   isSelecting: false,
   hoverSelection: { initX: 0, initY: 0, x: 0, y: 0, width: 0, height: 0 },
   handler: {
