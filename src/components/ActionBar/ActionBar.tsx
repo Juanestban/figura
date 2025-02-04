@@ -5,9 +5,7 @@ import s from './ActionBar.module.css';
 
 type PrimitiveProps = ComponentProps<'div'>;
 
-interface ActionBarProps extends PrimitiveProps {
-  // your props
-}
+interface ActionBarProps extends PrimitiveProps {}
 
 const ActionBar: FC<ActionBarProps> = ({ ref, className, children, ...props }) => {
   return (

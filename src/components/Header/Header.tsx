@@ -5,8 +5,9 @@ import { DrawAction, DrawerType } from 'figura/models';
 import { FiguraIcon } from '../FiguraIcon';
 
 import typography from 'figura/assets/typography.svg';
-import s from './Header.module.css';
 import { useDrawer } from 'figura/hooks/useDrawer';
+
+import s from './Header.module.css';
 
 type PrimitiveProps = Omit<ComponentProps<'header'>, 'children'>;
 
