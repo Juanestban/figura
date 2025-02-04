@@ -53,20 +53,29 @@ function DrawerProvider({ children }: PropsWithChildren) {
       const { evt } = event;
       const { clientX, clientY } = evt;
 
+      if (initX === clientX && initY === clientY) {
+        clearAll();
+        return;
+      }
+
       const width = initX > clientX ? initX - clientX : clientX - initX;
       const height = initY > clientY ? initY - clientY : clientY - initY;
       const x = initX > clientX ? initX - width : initX;
       const y = initY > clientY ? initY - height : initY;
 
-      setIsSelecting(false);
+      clearAll();
       dispatch({
         type: DrawerType.NEW_FIGURE,
         payload: {
           props: { x, y, width, height, stroke: 'red', strokeWidth: 2 },
         },
       });
-      handleHoverSelection(DEFAULT_HOVER_SELECTION);
     }
+  };
+
+  const clearAll = () => {
+    setIsSelecting(false);
+    handleHoverSelection(DEFAULT_HOVER_SELECTION);
   };
 
   return (
