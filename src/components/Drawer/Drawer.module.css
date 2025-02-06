@@ -1,2 +1,8 @@
 .container {
 }
+
+.rectangles {
+  background-image: linear-gradient(to right, #e0f2f1 1px, transparent 1px),
+    linear-gradient(to bottom, #e0f2f1 1px, transparent 1px);
+  background-size: 20px 20px;
+}

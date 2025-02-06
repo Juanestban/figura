@@ -40,6 +40,7 @@ const Drawer: FC<DrawerProps> = ({ ref, className, ...props }) => {
         onMouseDown={mouseDown}
         onMouseUp={mouseUp}
         onMouseMove={handleMouseMove}
+        className={clsx('absolute inset-0', false && s.rectangles)}
       >
         <Layer>
           {(currentFigures ?? []).map(({ id, type, props }) => (
