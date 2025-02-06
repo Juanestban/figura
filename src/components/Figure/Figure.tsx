@@ -6,9 +6,9 @@ import type { Child, PrimitiveFigure } from 'figura/models/idrawer';
 interface FigureProps extends Child {}
 
 const Element: Record<Child['type'], PrimitiveFigure> = {
-  Rect: Rect,
-  Circle: Circle,
-  Text: Text,
+  Rect,
+  Circle,
+  Text,
 };
 
 const Figure: FC<FigureProps> = ({ type, props }) => {
