@@ -5,6 +5,8 @@ import { type KonvaNodeComponent } from 'react-konva';
 export enum DrawerType {
   NEW_FIGURE,
   CHANGE_DRAW_ACTION,
+  HOVER_SELECTION,
+  FIGURE_SELECTED,
 }
 
 export type PrimitiveFigure =
@@ -27,6 +29,8 @@ export interface Figure extends Child {
 export interface DrawerState {
   action: DrawAction;
   figures: Figure[];
+  isSelecting: boolean;
+  selectedId: string | null;
 }
 
 type Handler = (event: Konva.KonvaEventObject<MouseEvent>) => void;
@@ -42,7 +46,6 @@ export interface HoverSelection {
 
 export interface DrawerContextType {
   state: DrawerState;
-  isSelecting: boolean;
   hoverSelection: HoverSelection;
   handler: {
     mouseDown: Handler;

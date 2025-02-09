@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import Konva from 'konva';
 import { Stage, Layer } from 'react-konva';
 
+import { STROKE_COLOR_HOVER } from 'figura/config/constants';
 import { useDrawer } from 'figura/hooks/useDrawer';
 import { Figure } from '../Figure';
 
@@ -13,8 +14,8 @@ type PrimitiveProps = Omit<ComponentProps<'div'>, 'children'>;
 interface DrawerProps extends PrimitiveProps {}
 
 const Drawer: FC<DrawerProps> = ({ ref, className, ...props }) => {
-  const { state, isSelecting, hoverSelection, handler, handleHoverSelection } = useDrawer();
-  const { figures } = state;
+  const { state, hoverSelection, handler, handleHoverSelection } = useDrawer();
+  const { figures, isSelecting } = state;
   const { mouseDown, mouseUp } = handler;
   const currentFigures = figures;
 
@@ -44,14 +45,14 @@ const Drawer: FC<DrawerProps> = ({ ref, className, ...props }) => {
       >
         <Layer>
           {(currentFigures ?? []).map(({ id, type, props }) => (
-            <Figure key={id} type={type} props={props} />
+            <Figure key={id} id={id} type={type} props={props} />
           ))}
           {isSelecting && (
             <Figure
               type="Rect"
               props={{
                 ...hoverSelection,
-                stroke: '#09f',
+                stroke: STROKE_COLOR_HOVER,
                 strokeWidth: 1,
               }}
             />

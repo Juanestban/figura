@@ -19,6 +19,10 @@ export default function reducer(
         figures: structuredClone([...state.figures, newFigure]),
       };
     }
+    case DrawerType.HOVER_SELECTION:
+      return { ...state, isSelecting: payload };
+    case DrawerType.FIGURE_SELECTED:
+      return { ...state, selectedId: payload };
     case DrawerType.CHANGE_DRAW_ACTION:
       return { ...state, action: payload };
     default:
