@@ -1,7 +1,9 @@
-export const COMMANDS = {
-  DELETE: ['Delete'],
-  CANCEL: ['Escape'],
-  COPY: ['Control', 'c'],
-  SAVE: ['Control', 's'],
-  PASTE: ['Control', 'v'],
+import { ICommandName } from 'figura/models';
+
+export const COMMANDS: Record<ICommandName, string[]> = {
+  [ICommandName.DELETE]: ['Delete'],
+  [ICommandName.CANCEL]: ['Escape'],
+  [ICommandName.COPY]: ['Control', 'c'],
+  [ICommandName.SAVE]: ['Control', 's'],
+  [ICommandName.PASTE]: ['Control', 'v'],
 };

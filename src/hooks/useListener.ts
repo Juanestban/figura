@@ -1,8 +1,9 @@
 import { useContext, useEffect } from 'react';
 
 import { ListenerContext } from 'figura/contexts/ListenerProvider';
+import { ICommandName } from 'figura/models';
 
-export const useListener = <T>(callback: T) => {
+export const useListener = (callback: (command: ICommandName) => void) => {
   const listenerHook = useContext(ListenerContext);
 
   if (!listenerHook) {

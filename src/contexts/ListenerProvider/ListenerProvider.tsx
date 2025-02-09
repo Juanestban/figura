@@ -1,5 +1,6 @@
 import { type PropsWithChildren, useState, useEffect } from 'react';
 
+import { ICommandName } from 'figura/models';
 import { COMMANDS } from 'figura/config/constants';
 import { Observable } from 'figura/utils/observable';
 import { ListenerContext } from './ListenerContext';
@@ -16,8 +17,7 @@ function ListenerProvider({ children }: PropsWithChildren) {
       Object.entries(COMMANDS).forEach(([command, keys]) => {
         if (keys.every((key) => newKeyPress.has(key))) {
           event.preventDefault();
-
-          observable.notify(command);
+          observable.notify(command as ICommandName);
         }
       });
 
