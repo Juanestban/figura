@@ -11,17 +11,18 @@ function ListenerProvider({ children }: PropsWithChildren) {
   const [keyPressed, setkeyPressed] = useState<Set<string>>(new Set());
 
   const listeners = (event: KeyboardEvent) => {
+    let newKeyPress = new Set<string>();
+
     setkeyPressed((prevKeyPress) => {
-      const newKeyPress = new Set(prevKeyPress).add(event.key);
-
-      Object.entries(COMMANDS).forEach(([command, keys]) => {
-        if (keys.every((key) => newKeyPress.has(key))) {
-          event.preventDefault();
-          observable.notify(command as ICommandName);
-        }
-      });
-
+      newKeyPress = new Set(prevKeyPress).add(event.key);
       return newKeyPress;
+    });
+
+    Object.entries(COMMANDS).forEach(([command, keys]) => {
+      if (keys.every((key) => newKeyPress.has(key))) {
+        event.preventDefault();
+        observable.notify(command as ICommandName);
+      }
     });
   };
 
