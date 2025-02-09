@@ -6,7 +6,6 @@ import { INITIALDRAWER_CONTEXT_STATE } from 'figura/config/constants';
 
 export const DrawerContext = createContext<DrawerContextType>({
   state: INITIALDRAWER_CONTEXT_STATE,
-  isSelecting: false,
   hoverSelection: { initX: 0, initY: 0, x: 0, y: 0, width: 0, height: 0 },
   handler: {
     mouseDown: noop,

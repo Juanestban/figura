@@ -3,17 +3,17 @@ import Konva from 'konva';
 
 import { DrawerContext } from './DrawerContext';
 import reducer from './reducer';
-import { DrawerType } from 'figura/models';
+import { DrawerType, ICommandName } from 'figura/models';
 import type { HoverSelection, IPosition } from 'figura/models';
 import {
   INITIAL_POSITIONS,
   INITIALDRAWER_CONTEXT_STATE,
   DEFAULT_HOVER_SELECTION,
 } from 'figura/config/constants';
+import { useListener } from 'figura/hooks/useListener';
 
 function DrawerProvider({ children }: PropsWithChildren) {
   const [positions, setPositions] = useState<IPosition>(INITIAL_POSITIONS);
-  const [isSelecting, setIsSelecting] = useState(false);
   const [hoverSelection, setHoverSelection] = useState<HoverSelection>(DEFAULT_HOVER_SELECTION);
   const [state, dispatch] = useReducer(reducer, INITIALDRAWER_CONTEXT_STATE);
   const { action } = state;
@@ -25,7 +25,7 @@ function DrawerProvider({ children }: PropsWithChildren) {
 
       setPositions({ x, y });
       setHoverSelection((prev) => ({ ...prev, initX: x, initY: y, x, y }));
-      setIsSelecting(true);
+      dispatch({ type: DrawerType.HOVER_SELECTION, payload: true });
     }
   };
 
@@ -54,22 +54,28 @@ function DrawerProvider({ children }: PropsWithChildren) {
       dispatch({
         type: DrawerType.NEW_FIGURE,
         payload: {
-          props: { x, y, width, height, stroke: 'red', strokeWidth: 2 },
+          props: { x, y, width, height, stroke: 'red', strokeWidth: 1 },
         },
       });
     }
   };
 
   const clearAll = () => {
-    setIsSelecting(false);
+    dispatch({ type: DrawerType.HOVER_SELECTION, payload: false });
     handleHoverSelection(DEFAULT_HOVER_SELECTION);
   };
+
+  useListener((cmd) => {
+    if (cmd === ICommandName.CANCEL) {
+      clearAll();
+      dispatch({ type: DrawerType.FIGURE_SELECTED, payload: null });
+    }
+  });
 
   return (
     <DrawerContext.Provider
       value={{
         state,
-        isSelecting,
         hoverSelection,
         handler: {
           mouseDown,
