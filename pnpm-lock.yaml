@@ -21,8 +21,8 @@ importers:
         specifier: 9.3.18
         version: 9.3.18
       lun-cli:
-        specifier: 2.5.0
-        version: 2.5.0
+        specifier: 3.0.0
+        version: 3.0.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react:
         specifier: 19.0.0
         version: 19.0.0
@@ -1494,9 +1494,12 @@ packages:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
     hasBin: true
 
-  lun-cli@2.5.0:
-    resolution: {integrity: sha512-B2lSBRexpb9xtIhHG4OrA/EbmiQ7NjxSJlWuyKRcdoIWgsx0t3hLXhBLLhqaX1YdhjWo1QbbC/rPiIYUp4g4mg==}
+  lun-cli@3.0.0:
+    resolution: {integrity: sha512-qjrGRuDbich5ji9Bp8ZYh8v1TtedlwHcc+IQZkwMyHk6mGFImXZwEmVb12G/MCNj7QJfEqQ9/sSyWqKa63E9cw==}
     hasBin: true
+    peerDependencies:
+      react: 19.0.0
+      react-dom: 19.0.0
 
   math-intrinsics@1.1.0:
     resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
@@ -3418,11 +3421,13 @@ snapshots:
     dependencies:
       js-tokens: 4.0.0
 
-  lun-cli@2.5.0:
+  lun-cli@3.0.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
       cac: 6.7.14
       minimist: 1.2.8
       picocolors: 1.0.0
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
 
   math-intrinsics@1.1.0: {}
 

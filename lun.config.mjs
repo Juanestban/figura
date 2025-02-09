@@ -1,6 +1,6 @@
-const { defineLunConfig } = require('lun-cli');
+import { defineLunConfig } from 'lun-cli';
 
-module.exports = defineLunConfig({
+export default defineLunConfig({
   root: 'src',
   defaultTemplate: 'react-ts',
   css: 'module',
