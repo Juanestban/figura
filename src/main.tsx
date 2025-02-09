@@ -1,6 +1,7 @@
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 
+import { ListenerProvider } from './contexts/ListenerProvider';
 import { ThemeProvider } from './contexts/ThemeProvider';
 import App from './App';
 
@@ -10,8 +11,10 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
   <StrictMode>
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
+    <ListenerProvider>
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    </ListenerProvider>
   </StrictMode>,
 );
